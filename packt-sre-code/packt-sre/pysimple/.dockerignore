@@ -1,0 +1,8 @@
+*.xlsx
+*.png
+venv
+.venv
+.git
+docs
+tests
+.idea

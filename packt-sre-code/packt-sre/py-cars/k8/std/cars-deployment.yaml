@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cars2-deployment
+  name: cars2-deployment
+  namespace: pycars
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pycars
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pycars
+    spec:
+      containers:
+      - image: 915793320862.dkr.ecr.eu-west-2.amazonaws.com/py-cars
+        name: pycars
+        ports:
+          - containerPort: 8001
+        env:
+          - name: "HOST"
+            value: "cars.cu6dyxkvr5xc.eu-west-2.rds.amazonaws.com"
+          - name: "DB"
+            value: "cars"
+          - name: "DB_USER"
+            value: "carsa"
+          - name: "DB_PASS"
+            value: "LetmeinAWS!!"
+          - name: "ECS_RUN"
+            value: "true"

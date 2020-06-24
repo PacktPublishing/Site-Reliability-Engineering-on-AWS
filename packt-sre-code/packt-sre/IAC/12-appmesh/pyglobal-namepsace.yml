@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: pycars
+  labels:
+    mesh: pyglobal
+    appmesh.k8s.aws/sidecarInjectorWebhook: enabled

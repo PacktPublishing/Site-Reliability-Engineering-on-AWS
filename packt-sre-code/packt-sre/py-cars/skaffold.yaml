@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta5
+kind: Config
+metadata:
+  name: py-cars
+build:
+  artifacts:
+  - image: xx.dkr.ecr.eu-west-2.amazonaws.com/py-cars
+    sync:
+      infer:
+        - '**/*.py'
+        - '**/*.yaml'
+        - 'src/local.cfg.ini'
+        - 'src/schema.sql'
+
+deploy:
+  kubectl:
+    manifests:
+    - k8/std/cars-deployment.yaml
+    - k8/std/cars-service.yaml

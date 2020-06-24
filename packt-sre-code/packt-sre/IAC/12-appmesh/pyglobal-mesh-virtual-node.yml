@@ -1,0 +1,16 @@
+apiVersion: appmesh.k8s.aws/v1beta2
+kind: VirtualNode
+metadata:
+  name: pycars
+  namespace: pycars
+spec:
+  podSelector:
+    matchLabels:
+      app: pycars
+  listeners:
+    - portMapping:
+        port: 8001
+        protocol: tcp
+  serviceDiscovery:
+    dns:
+      hostname: pycars-service.pycars.svc.cluster.local

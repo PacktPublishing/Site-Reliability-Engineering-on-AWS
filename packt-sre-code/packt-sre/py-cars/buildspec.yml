@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entering install phase...
+      - pip3 install pytest pytest_dependency
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG   
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_SECOND_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG   
+   
+  post_build:
+    commands:
+      - echo Build completed on `date` starting test
+      - docker run  --name test -p 8001:8001 -d --rm --env HOST=$HOST --env DB=$DB --env DB_USER=$DB_USER --env DB_PASS=$DB_PASS --env CODEBUILD_BUILD_ID=$CODEBUILD_BUILD_ID $IMAGE_REPO_NAME:$IMAGE_TAG
+      - sleep 15s
+      - docker ps
+      - docker logs test
+      - curl http://127.0.0.1:8001/api/v0.1/health
+      - python3 -m pytest tests/api-tests.py
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - $(aws ecr get-login --no-include-email --region $AWS_SECOND_REGION) 
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_SECOND_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo "creating imagedefinitions.json for ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+      - export JSON_FMT='[{"name":"%s","imageUri":"%s"}]'
+      - printf $JSON_FMT "$IMAGE_REPO_NAME" "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}" > imagedefinitions.json
+      - cat imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json    

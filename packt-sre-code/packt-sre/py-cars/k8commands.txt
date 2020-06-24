@@ -1,0 +1,17 @@
+aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin xx.dkr.ecr.eu-west-2.amazonaws.com
+
+helm upgrade -i appmesh-controller eks/appmesh-controller --namespace appmesh-system
+
+
+helm upgrade -i appmesh-inject eks/appmesh-inject --namespace appmesh-system --set mesh.create=true --set mesh.name=global
+
+eksctl utils associate-iam-oidc-provider --region=eu-west-2 --cluster meshtest --approve
+
+eksctl create iamserviceaccount --cluster meshtest --namespace appmesh-system --name appmesh-controller --attach-policy-arn  arn:aws:iam::aws:policy/AWSCloudMapFullAccess,arn:aws:iam::aws:policy/AWSAppMeshFullAccess --override-existing-serviceaccounts --approve
+
+helm upgrade -i appmesh-controller eks/appmesh-controller --namespace appmesh-system --set region=eu-west-2 --set serviceAccount.create=false --set serviceAccount.name=appmesh-controller
+
+kubectl get deployment appmesh-controller -n appmesh-system -o json  | jq -r ".spec.template.spec.containers[].image" | cut -f2 -d ':'
+
+kubectl describe mesh pyglobal
+aws appmesh describe-mesh --mesh-name pyglobal
