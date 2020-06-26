@@ -1,5 +1,5 @@
 # Site Reliability Engineering on AWS [Video]
-This is the code repository for [Site Reliability Engineering on AWS](https://www.packtpub.com/data/first-guide-to-dashboards-using-ibm-cognos-analytics-v11-1-r5-second-edition-video). It contains all the supporting project files necessary to work through the video course from start to finish.
+This is the code repository for [Site Reliability Engineering on AWS](https://www.packtpub.com/cloud-networking/site-reliability-engineering-on-aws-video). It contains all the supporting project files necessary to work through the video course from start to finish.
 ## About the Video Course
 Reliability in AWS includes the ability of a system to recover from infrastructure or service disruptions. It's essential to acquire computing resources to meet the demand, and mitigate disruptions such as configuration issues or transient network problems.
 
