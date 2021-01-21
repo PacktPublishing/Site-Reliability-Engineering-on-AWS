@@ -1,8 +1,3 @@
-## $5 Tech Unlocked 2021!
-[Buy and download this Video for only $5 on PacktPub.com](https://www.packtpub.com/product/site-reliability-engineering-on-aws-video/9781800205970)
------
-*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
-
 # Site Reliability Engineering on AWS [Video]
 This is the code repository for [Site Reliability Engineering on AWS](https://www.packtpub.com/cloud-networking/site-reliability-engineering-on-aws-video). It contains all the supporting project files necessary to work through the video course from start to finish.
 ## About the Video Course
