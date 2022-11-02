@@ -39,7 +39,3 @@ This course has the following software requirements:<br/>
 
 * [AWS Certified Cloud Practitioner (CLF-C01) [Video]](https://www.packtpub.com/cloud-networking/aws-certified-cloud-practitioner-clf-c01-video)
 
-### Download a free PDF
-
- <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
-<p align="center"> <a href="https://packt.link/free-ebook/9781800205970">https://packt.link/free-ebook/9781800205970 </a> </p>
