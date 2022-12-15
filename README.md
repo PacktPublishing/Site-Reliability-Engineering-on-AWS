@@ -1,3 +1,15 @@
+
+### Get this product for $5
+
+<i>Packt is having its biggest sale of the year. Get this eBook or any other book, video, or course that you like just for $5 each</i>
+
+
+<b><p align='center'>[Buy now](https://packt.link/9781800205970)</p></b>
+
+
+<b><p align='center'>[Buy similar titles for just $5](https://subscription.packtpub.com/search)</p></b>
+
+
 # Site Reliability Engineering on AWS [Video]
 This is the code repository for [Site Reliability Engineering on AWS](https://www.packtpub.com/cloud-networking/site-reliability-engineering-on-aws-video). It contains all the supporting project files necessary to work through the video course from start to finish.
 ## About the Video Course
